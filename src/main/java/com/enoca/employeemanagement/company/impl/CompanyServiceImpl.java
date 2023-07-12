@@ -2,6 +2,8 @@ package com.enoca.employeemanagement.company.impl;
 
 import com.enoca.employeemanagement.company.api.CompanyDto;
 import com.enoca.employeemanagement.company.api.CompanyService;
+import com.enoca.employeemanagement.employee.api.EmployeeService;
+import com.enoca.employeemanagement.employee.impl.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository repository;
+    private final EmployeeService employeeService;
 
     @Override
     public CompanyDto create(CompanyDto dto) {
@@ -29,8 +32,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void delete(String id) {
-        repository.delete(repository
-                .findById(Integer.parseInt(id))
+        repository.delete(repository.findById(Integer.parseInt(id))
                 .orElseThrow(() -> new EntityNotFoundException("Company not found.")));
     }
 
@@ -49,11 +51,20 @@ public class CompanyServiceImpl implements CompanyService {
                 .orElseThrow(() -> new EntityNotFoundException("Company not found.")));
     }
 
+    @Override
+    public Company findById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Company not found."));
+    }
+
     private Company toEntity(Company company, CompanyDto dto) {
         company.setName(dto.getName());
         company.setAddress(dto.getAddress());
         company.setRegion(dto.getRegion());
         company.setPhoneNumber(dto.getPhoneNumber());
+        company.setEmployeeList(dto.getEmployeeDtos().stream()
+                .map(employeeDto -> employeeService.toEntity(new Employee(), employeeDto))
+                .collect(Collectors.toList()));
         return company;
     }
 
@@ -64,6 +75,9 @@ public class CompanyServiceImpl implements CompanyService {
                 .address(company.getAddress())
                 .region(company.getRegion())
                 .phoneNumber(company.getPhoneNumber())
+                .employeeDtos((company.getEmployeeList().stream()
+                        .map(employeeService::toDto)
+                        .collect(Collectors.toList())))
                 .build();
     }
 }

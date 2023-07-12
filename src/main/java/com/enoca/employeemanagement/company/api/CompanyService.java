@@ -1,5 +1,6 @@
 package com.enoca.employeemanagement.company.api;
 
+import com.enoca.employeemanagement.company.impl.Company;
 import com.enoca.employeemanagement.company.impl.CompanyListResponse;
 
 public interface CompanyService {
@@ -12,4 +13,5 @@ public interface CompanyService {
     void delete(String id);
 
     CompanyDto getById(String id);
+    Company findById(int id);
 }
