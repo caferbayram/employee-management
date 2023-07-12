@@ -15,7 +15,8 @@ public class CompanyResponse {
     private String address;
     private String region;
     private String phoneNumber;
-    private List<EmployeeDto>employeeList;
+    private List<EmployeeDto> employeeList;
+
     public static CompanyResponse fromDto(CompanyDto companyDto) {
         return CompanyResponse.builder()
                 .id(companyDto.getId())

@@ -13,5 +13,6 @@ public interface CompanyService {
     void delete(String id);
 
     CompanyDto getById(String id);
+
     Company findById(int id);
 }

@@ -11,6 +11,7 @@ public class CompanyRequest {
     private String address;
     private String region;
     private String phoneNumber;
+
     public CompanyDto toDto() {
         return CompanyDto.builder()
                 .name(name)

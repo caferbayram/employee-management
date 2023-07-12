@@ -13,6 +13,7 @@ public class EmployeeRequest {
     private String address;
     private String department;
     private int companyId;
+
     public EmployeeDto toDto() {
         return EmployeeDto.builder()
                 .name(name)

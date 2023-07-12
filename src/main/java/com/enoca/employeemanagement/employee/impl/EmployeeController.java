@@ -9,25 +9,30 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class EmployeeController {
     private final EmployeeService service;
+
     @PostMapping
-    public EmployeeResponse createEmployee(@RequestBody EmployeeRequest request){
+    public EmployeeResponse createEmployee(@RequestBody EmployeeRequest request) {
         return EmployeeResponse.fromDto(service.create(request.toDto()));
     }
+
     @PutMapping("/{id}")
-    public EmployeeResponse updateEmployee(@PathVariable(name = "id")String id,
-                                           @RequestBody EmployeeRequest request){
+    public EmployeeResponse updateEmployee(@PathVariable(name = "id") String id,
+                                           @RequestBody EmployeeRequest request) {
         return EmployeeResponse.fromDto(service.update(id, request.toDto()));
     }
+
     @GetMapping
-    public EmployeeListResponse getAll(){
+    public EmployeeListResponse getAll() {
         return service.getAll();
     }
+
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable(name = "id")String id){
+    public void deleteEmployee(@PathVariable(name = "id") String id) {
         service.delete(id);
     }
+
     @GetMapping("/{id}")
-    public EmployeeResponse getEmployeeById(@PathVariable(name = "id")String id){
+    public EmployeeResponse getEmployeeById(@PathVariable(name = "id") String id) {
         return EmployeeResponse.fromDto(service.getById(id));
     }
 }

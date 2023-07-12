@@ -13,6 +13,8 @@ public interface EmployeeService {
     void delete(String id);
 
     EmployeeDto getById(String id);
+
     Employee toEntity(Employee employee, EmployeeDto dto);
+
     EmployeeDto toDto(Employee employee);
 }

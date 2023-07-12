@@ -16,10 +16,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository repository;
     private final CompanyService companyService;
+
     @Autowired
-    public EmployeeServiceImpl(@Lazy CompanyService companyService){
+    public EmployeeServiceImpl(@Lazy CompanyService companyService) {
         this.companyService = companyService;
     }
+
     @Override
     public EmployeeDto create(EmployeeDto dto) {
         return toDto(repository.save(toEntity(new Employee(), dto)));
@@ -55,6 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return toDto(repository.findById(Integer.parseInt(id))
                 .orElseThrow(() -> new EntityNotFoundException("Employee not found.")));
     }
+
     @Override
     public Employee toEntity(Employee employee, EmployeeDto dto) {
         employee.setName(dto.getName());
@@ -64,6 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setCompany(companyService.findById(dto.getCompanyDto().getId()));
         return employee;
     }
+
     @Override
     public EmployeeDto toDto(Employee employee) {
         return EmployeeDto.builder()
