@@ -24,7 +24,7 @@ public class CompanyResponse {
                 .name(companyDto.getName())
                 .region(companyDto.getRegion())
                 .phoneNumber(companyDto.getPhoneNumber())
-                .employeeList(companyDto.getEmployeeDtos())
+                .employeeList(companyDto.getEmployeeList())
                 .build();
     }
 }

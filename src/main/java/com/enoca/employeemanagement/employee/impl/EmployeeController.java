@@ -2,6 +2,7 @@ package com.enoca.employeemanagement.employee.impl;
 
 import com.enoca.employeemanagement.employee.api.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,8 +28,9 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable(name = "id") String id) {
+    public HttpStatus deleteEmployee(@PathVariable(name = "id") String id) {
         service.delete(id);
+        return HttpStatus.OK;
     }
 
     @GetMapping("/{id}")

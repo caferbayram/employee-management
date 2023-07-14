@@ -2,6 +2,7 @@ package com.enoca.employeemanagement.company.impl;
 
 import com.enoca.employeemanagement.company.api.CompanyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,7 +33,8 @@ public class CompanyController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCompany(@PathVariable(name = "id") String id) {
+    public HttpStatus deleteCompany(@PathVariable(name = "id") String id) {
         service.delete(id);
+        return HttpStatus.OK;
     }
 }

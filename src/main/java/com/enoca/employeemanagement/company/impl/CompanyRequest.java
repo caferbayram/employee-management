@@ -1,8 +1,11 @@
 package com.enoca.employeemanagement.company.impl;
 
 import com.enoca.employeemanagement.company.api.CompanyDto;
+import com.enoca.employeemanagement.employee.api.EmployeeDto;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -11,6 +14,7 @@ public class CompanyRequest {
     private String address;
     private String region;
     private String phoneNumber;
+    private List<EmployeeDto> employeeList;
 
     public CompanyDto toDto() {
         return CompanyDto.builder()
@@ -18,6 +22,7 @@ public class CompanyRequest {
                 .address(address)
                 .region(region)
                 .phoneNumber(phoneNumber)
+                .employeeList(employeeList)
                 .build();
     }
 }

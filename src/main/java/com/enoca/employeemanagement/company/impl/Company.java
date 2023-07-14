@@ -24,4 +24,11 @@ public class Company {
     private String phoneNumber;
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Employee> employeeList;
+
+//    public List<Employee> getEmployeeList() {
+//        if(this.employeeList == null){
+//            this.employeeList = new ArrayList<>();
+//        }
+//        return employeeList;
+//    }
 }

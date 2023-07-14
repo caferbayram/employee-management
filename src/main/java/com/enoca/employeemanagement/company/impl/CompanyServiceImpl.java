@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Collections;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,9 +64,10 @@ public class CompanyServiceImpl implements CompanyService {
         company.setAddress(dto.getAddress());
         company.setRegion(dto.getRegion());
         company.setPhoneNumber(dto.getPhoneNumber());
-        company.setEmployeeList(dto.getEmployeeDtos().stream()
+        company.setEmployeeList(Optional.of(dto.getEmployeeList().stream()
                 .map(employeeDto -> employeeService.toEntity(new Employee(), employeeDto))
-                .collect(Collectors.toList()));
+                .toList())
+                .orElse(Collections.emptyList()));
         return company;
     }
 
@@ -75,9 +78,10 @@ public class CompanyServiceImpl implements CompanyService {
                 .address(company.getAddress())
                 .region(company.getRegion())
                 .phoneNumber(company.getPhoneNumber())
-                .employeeDtos((company.getEmployeeList().stream()
+                .employeeList(Optional.of(company.getEmployeeList().stream()
                         .map(employeeService::toDto)
-                        .collect(Collectors.toList())))
+                        .collect(Collectors.toList()))
+                        .orElse(Collections.emptyList()))
                 .build();
     }
 }
