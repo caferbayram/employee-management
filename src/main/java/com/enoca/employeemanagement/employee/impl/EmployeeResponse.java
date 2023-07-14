@@ -13,7 +13,7 @@ public class EmployeeResponse {
     private String phoneNumber;
     private String address;
     private String department;
-    private CompanyDto companyDto;
+    private CompanyDto company;
 
     public static EmployeeResponse fromDto(EmployeeDto employeeDto) {
         return EmployeeResponse.builder()
@@ -22,7 +22,7 @@ public class EmployeeResponse {
                 .phoneNumber(employeeDto.getPhoneNumber())
                 .address(employeeDto.getAddress())
                 .department(employeeDto.getDepartment())
-                .companyDto(CompanyDto.builder()
+                .company(CompanyDto.builder()
                         .id(employeeDto.getCompanyDto().getId())
                         .name(employeeDto.getCompanyDto().getName())
                         .address(employeeDto.getCompanyDto().getAddress())
