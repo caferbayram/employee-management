@@ -4,7 +4,7 @@ import com.enoca.employeemanagement.company.api.CompanyDto;
 import com.enoca.employeemanagement.company.api.CompanyService;
 import com.enoca.employeemanagement.employee.api.EmployeeDto;
 import com.enoca.employeemanagement.employee.api.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +12,10 @@ import javax.persistence.EntityNotFoundException;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Lazy)
 public class EmployeeServiceImpl implements EmployeeService {
-    @Autowired
-    EmployeeRepository repository;
+    private final EmployeeRepository repository;
     private final CompanyService companyService;
-
-    @Autowired
-    public EmployeeServiceImpl(@Lazy CompanyService companyService) {
-        this.companyService = companyService;
-    }
 
     @Override
     public EmployeeDto create(EmployeeDto dto) {
